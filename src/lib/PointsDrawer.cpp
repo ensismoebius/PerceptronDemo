@@ -12,10 +12,6 @@ PointsDrawer::PointsDrawer(std::vector<Point> &points, sf::RenderWindow &window)
     }
 }
 
-PointsDrawer::~PointsDrawer()
-{
-}
-
 void PointsDrawer::drawPoints(std::vector<Point> &points, sf::RenderWindow &window, Neural::Perceptron &p)
 {
     for (unsigned int i = 0; i < points.size(); i++)

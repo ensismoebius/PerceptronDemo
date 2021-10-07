@@ -24,7 +24,6 @@ private:
 public:
     PointsDrawer(std::vector<Point> &points, sf::RenderWindow &window);
     void drawPoints(std::vector<Point> &points, sf::RenderWindow &window, Neural::Perceptron &p);
-    ~PointsDrawer();
 };
 
 #endif
