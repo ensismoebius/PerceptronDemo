@@ -17,10 +17,10 @@ Neural::Perceptron::Perceptron(unsigned int weightsSize) :                      
 Neural::Perceptron::~Perceptron()
 {
 }
-void Neural::Perceptron::train(std::vector<float> inputs, int target)
+void Neural::Perceptron::train(std::vector<float> inputs, float target)
 {
-    int guess = this->guess(inputs);
-    int error = target - guess;
+    float guess = this->guess(inputs);
+    float error = target - guess;
 
     // Calculate the new weight for bias (error * 1 * learnningRate)
     this->weights[0] += error * this->learnningRate;
@@ -31,24 +31,21 @@ void Neural::Perceptron::train(std::vector<float> inputs, int target)
         this->weights[i] += error * inputs[i - 1] * this->learnningRate;
     }
 }
-int Neural::Perceptron::guess(std::vector<float> inputs)
+float Neural::Perceptron::guess(std::vector<float> inputs)
 {
-    float sum = 0;
-
     // Sums the bias (1 * first weight)
-    sum += weights[0];
+    float sum = weights[0];
 
     // Sums the other values
     for (unsigned int i = 1; i < this->weights.size(); i++)
     {
         sum += inputs[i - 1] * weights[i];
     }
-    int output = this->activationFunction(sum);
 
-    return output;
+    return this->activationFunction(sum);
 }
 
-int Neural::Perceptron::activationFunction(float value)
+float Neural::Perceptron::activationFunction(float value)
 {
     return value >= 0 ? 1 : -1;
 }

@@ -31,7 +31,7 @@ namespace Neural
          * @param value 
          * @return int 
          */
-        static inline int activationFunction(float value);
+        static inline float activationFunction(float value);
 
     public:
         /**
@@ -42,9 +42,9 @@ namespace Neural
         Perceptron(unsigned int weightsSize);
         ~Perceptron();
 
-        void train(std::vector<float> inputs, int target);
+        void train(std::vector<float> inputs, float target);
 
-        int guess(std::vector<float> inputs);
+        float guess(std::vector<float> inputs);
     };
 }
 
