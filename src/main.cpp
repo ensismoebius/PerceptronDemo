@@ -12,6 +12,29 @@
 const float WINDOW_WIDTH = 800;
 const float WINDOW_HEIGHT = 800;
 
+void createLine(sf::Vertex *line, std::vector<float> &weights, sf::RenderWindow &window)
+{
+    float x1 = -1;
+    float x2 = 1;
+
+    float y1 = -(weights[1] / weights[2]) * x1 - (weights[0] / weights[2]);
+    float y2 = -(weights[1] / weights[2]) * x2 - (weights[0] / weights[2]);
+
+    x1 = mapOneRangeToAnother(x1, -1, 1, 0, window.getSize().x, 5);
+    x2 = mapOneRangeToAnother(x2, -1, 1, 0, window.getSize().x, 5);
+
+    y1 = mapOneRangeToAnother(y1, -1, 1, window.getSize().y, 0, 5);
+    y2 = mapOneRangeToAnother(y2, -1, 1, window.getSize().y, 0, 5);
+
+    line[0].position.x = x1;
+    line[0].position.y = y1;
+    line[0].color = sf::Color::Black;
+
+    line[1].position.x = x2;
+    line[1].position.y = y2;
+    line[1].color = sf::Color::Black;
+}
+
 int main(int argc, char const *argv[])
 {
 
@@ -20,7 +43,7 @@ int main(int argc, char const *argv[])
     /////////////////////////////
 
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 1;
+    settings.antialiasingLevel = 8;
 
     int32_t windowStyle = sf::Style::Default;
 
@@ -57,6 +80,9 @@ int main(int argc, char const *argv[])
     y2 = mapOneRangeToAnother(y2, -1, 1, window.getSize().y, 0, 5);
 
     sf::Vertex line[] = {sf::Vertex(sf::Vector2f(x1, y1)), sf::Vertex(sf::Vector2f(x2, y2))};
+
+    sf::Vertex line2[2];
+    createLine(line2, p.weights, window);
 
     // Draw the points
     PointsDrawer pd(points, window);
@@ -99,7 +125,9 @@ int main(int argc, char const *argv[])
         // Drawing the data
         window.clear(sf::Color::Magenta);
         pd.drawPoints(points, window, p);
-        window.draw(line, 3, sf::Lines);
+        window.draw(line, 2, sf::Lines);
+        createLine(line2, p.weights, window);
+        window.draw(line2, 2, sf::Lines);
         window.display();
     }
 

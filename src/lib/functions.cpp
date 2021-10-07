@@ -3,5 +3,5 @@
 float f(float x)
 {
     // y = mx + b
-    return .3 * x + .2;
+    return .89 * x + .2;
 }

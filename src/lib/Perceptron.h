@@ -21,8 +21,6 @@ namespace Neural
     class Perceptron
     {
     private:
-        std::vector<float> weights;
-
         float learnningRate;
 
         /**
@@ -34,6 +32,7 @@ namespace Neural
         static inline float activationFunction(float value);
 
     public:
+        std::vector<float> weights;
         /**
          * @brief Construct a new Perceptron object
          * 

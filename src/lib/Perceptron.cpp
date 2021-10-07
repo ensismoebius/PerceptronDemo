@@ -5,7 +5,7 @@
 Neural::Perceptron::Perceptron(unsigned int weightsSize) :                        //
                                                            weights(++weightsSize) // +1 from bias
 {
-    this->learnningRate = 0.000001;
+    this->learnningRate = 0.000002;
 
     for (unsigned int i = 0; i < weightsSize; i++)
     {
