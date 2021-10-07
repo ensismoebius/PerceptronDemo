@@ -5,17 +5,12 @@
 
 #include "lib/map.h"
 #include "lib/Point.h"
+#include "lib/functions.h"
 #include "lib/Perceptron.h"
 #include "lib/PointsDrawer.h"
 
 const float WINDOW_WIDTH = 800;
 const float WINDOW_HEIGHT = 800;
-
-float f(float x)
-{
-    // y = mx + b
-    return .3 * x + .2;
-}
 
 int main(int argc, char const *argv[])
 {

@@ -1,15 +1,16 @@
 #include <random>
+#include "random.h"
 #include "Perceptron.h"
 
-Neural::Perceptron::Perceptron(unsigned int weightsSize) : weights(weightsSize)
+Neural::Perceptron::Perceptron(unsigned int weightsSize) :                        //
+                                                           weights(++weightsSize) // +1 from bias
 {
-
     this->learnningRate = 0.000001;
 
     for (unsigned int i = 0; i < weightsSize; i++)
     {
         // Generates a value between -1 and 1
-        this->weights[i] = ((std::rand() / float(RAND_MAX)) * 2.0) - 1.0;
+        this->weights[i] = utils::random();
     }
 }
 
@@ -21,17 +22,26 @@ void Neural::Perceptron::train(std::vector<float> inputs, int target)
     int guess = this->guess(inputs);
     int error = target - guess;
 
-    for (unsigned int i = 0; i < this->weights.size(); i++)
+    // Calculate the new weight for bias (error * 1 * learnningRate)
+    this->weights[0] += error * this->learnningRate;
+
+    // Calculate the others new weights (error * input[i - 1] * learnningRate)
+    for (unsigned int i = 1; i < this->weights.size(); i++)
     {
-        this->weights[i] += error * inputs[i] * this->learnningRate;
+        this->weights[i] += error * inputs[i - 1] * this->learnningRate;
     }
 }
 int Neural::Perceptron::guess(std::vector<float> inputs)
 {
     float sum = 0;
-    for (unsigned int i = 0; i < this->weights.size(); i++)
+
+    // Sums the bias (1 * first weight)
+    sum += weights[0];
+
+    // Sums the other values
+    for (unsigned int i = 1; i < this->weights.size(); i++)
     {
-        sum += inputs[i] * weights[i];
+        sum += inputs[i - 1] * weights[i];
     }
     int output = this->activationFunction(sum);
 

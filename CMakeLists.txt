@@ -14,8 +14,9 @@ find_package(Threads REQUIRED)
 set (SRCS
 src/lib/PointsDrawer.cpp
 src/lib/Perceptron.cpp
-src/lib/Point.cpp
+src/lib/functions.cpp
 src/lib/random.cpp
+src/lib/Point.cpp
 src/lib/map.cpp
 src/main.cpp
 )
